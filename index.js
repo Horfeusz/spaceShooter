@@ -21,7 +21,7 @@ var images = {};
 //obiekty
 var entities = [];
 var canvas, ctx, player;
-var CANVA_HEIGHT = 800;
+var CANVA_HEIGHT = 600;
 var CANVA_WIDTH = 1000;
 
 //Obiekt obsługi klawiszy dla rakiety

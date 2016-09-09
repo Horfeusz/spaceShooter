@@ -10,7 +10,7 @@
 function createPlayer() {
     
     player = createEntity('spco', {x:500, 
-                                   y:600, 
+                                   y:480, 
                                    speed:6, 
                                    speedShot: 30, 
                                    speedShotInc: 0,
