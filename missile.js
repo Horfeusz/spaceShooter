@@ -27,4 +27,4 @@ function createMissile(playerX, playerY, playerWidth) {
 
     return missile;
 
-}
+};

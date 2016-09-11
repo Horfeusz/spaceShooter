@@ -96,7 +96,7 @@ function loadImges(directory, fileNames, onComplete) {
         //Przypisujemy zdarzenie wołane po załadowaniu obrazka
         img.onload = function() {
             imagesCount--;
-            if(imagesCount <= 0) {
+            if(imagesCount <= 0 && onComplete !== null) {
                 //Mamy załadowane wszystkie obrazki, wołamy inicjację aplikacji
                 onComplete();
             } 
@@ -173,6 +173,9 @@ function checkCollision() {
                     (entities[i].type === 'ufo' && entities[j].type === 'missile')) {
                 console.log("kolizja: " + entities[i].type + ' z ' + entities[j].type);
 
+                //wybuch
+                createExplosion(entities[j].x, entities[j].y);
+
                 entities[i].dead = true;
                 entities[j].dead = true;                
             };            
@@ -216,16 +219,23 @@ function initialize() {
     console.log('initialize()');
 
     createPlayer();
-    //createEntity('ufo', {x:0, y:20, vx:1, vy:0.1})
     createUfo({x:0, y:20, vx:1, vy:0.1});
-    //createEntity('ufo', {x:120, y:80, vx:1.1, vy:0})    
-    //createEntity('ufo', {x:40, y:130, vx:1.05, vy:0})    
+    createUfo({x:120, y:80, vx:1.1, vy:0});
+    createUfo({x:40, y:130, vx:1.05, vy:0});
 
     setInterval(gameLoop, 1000/60);           
 }
 /**************************************************************************************/
 $(document).ready(function() {
-    loadImges('images', ['spco.png', 'ufo.png', 'missile.png'], initialize);
+    loadImges('images', ['spco.png', 'ufo.png', 'missile.png'], null);
+    
+    var imgs = []; 
+    var pad = "0000";
+    for(i = 0; i < 279; i++) {
+        var number = "" + i;
+        imgs.push("explosion" + pad.substring(0, pad.length - number.length) + number + ".png")
+    }
+    loadImges('images/explosion', imgs, initialize);
 
     $(document).keydown(function(e) {
         if(keys[e.keyCode] !== undefined) {
