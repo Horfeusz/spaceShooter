@@ -2,8 +2,6 @@
 /**
  * Lista TODO
  * 
- * 1. Zrobić porządek w źródłach, wydzielić odpowiedzialność po plikach
- * 2. Ufa nie powinny znikać tylko kręcić się po ekranie, jakoś losowo się poruszać
  * 3. Przy zestrzeleniu ufa jakiś wybuch: http://jsdn.pl/javascript-tworzenie-animacji-grach-przy-uzyciu-spritesheetow/
  *                                          http://webkod.pl/kurs-css/lekcje/dzial-4/css3-animowany-obrazek-klatka-po-klatce
  * 4. Ufoki się odgryzają, zrzucają bąby
@@ -11,6 +9,9 @@
  * 6. Tło
  *
  * Fajne Sprity ufokowe: http://millionthvector.blogspot.com/p/free-sprites_12.html
+ * 
+ * Paczka spritów: http://opengameart.org/content/complete-spaceship-game-art-pack
+ *                  www.unluckystudio.com
  * 
  *  
  */
@@ -61,12 +62,14 @@ var EntityPrototype = {
         this.x += this.vx;
         this.y += this.vy;
     },
+    /** Zwracam szerokość obiektu */
     getWidth: function() {
         if(this.img === undefined || this.img === null) {
             return 0;
         }
         return this.img.width + this.correctWidth;
     },
+    /** Zwracam wysokość obiektu */
     getHeight: function () {
         if(this.img === undefined || this.img === null) {
             return 0;
@@ -219,9 +222,9 @@ function initialize() {
     console.log('initialize()');
 
     createPlayer();
-    createUfo({x:0, y:20, vx:1, vy:0.1});
-    createUfo({x:120, y:80, vx:1.1, vy:0});
-    createUfo({x:40, y:130, vx:1.05, vy:0});
+    createUfo({x:0, y:20});
+    createUfo({x:120, y:80});
+    createUfo({x:40, y:130});
 
     setInterval(gameLoop, 1000/60);           
 }

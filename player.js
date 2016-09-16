@@ -14,8 +14,8 @@ function createPlayer() {
                                    speed:6, 
                                    speedShot: 30, 
                                    speedShotInc: 0,
-                                   correctWidth: -210,
-                                   correctHeight: -210})
+                                   correctWidth: -230,
+                                   correctHeight: -230})
     
     /**
      * Metoda incerementująca znacznik odpowiedzialny z prędkość strzelania
