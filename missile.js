@@ -2,6 +2,8 @@
  * Tworzę obiekt pocisku
  */
 
+//Nazwa obiektu
+var MISSILE_NAME = 'missile';
 // Prędkość pocisku
 var MISSILE_SPEED = 3;
 

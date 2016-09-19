@@ -7,15 +7,17 @@
 *
 */
 
+var PLAYER_NAME = 'spco';
+
 function createPlayer() {
     
-    player = createEntity('spco', {x:500, 
-                                   y:480, 
-                                   speed:6, 
-                                   speedShot: 30, 
-                                   speedShotInc: 0,
-                                   correctWidth: -230,
-                                   correctHeight: -230})
+    player = createEntity(PLAYER_NAME, {x:500, 
+                                        y:480, 
+                                        speed:6, 
+                                        speedShot: 30, 
+                                        speedShotInc: 0,
+                                        correctWidth: -230,
+                                        correctHeight: -230})
     
     /**
      * Metoda incerementująca znacznik odpowiedzialny z prędkość strzelania

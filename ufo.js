@@ -2,6 +2,8 @@
  * Obsługa ufoków
  */
 
+var UFO_NAME = 'ufo';
+
 var UFO_X_SPEED = 1;
 
 function createUfo(param) {
@@ -21,7 +23,7 @@ function createUfo(param) {
         return parameters;
     };
         
-    var ufo = createEntity('ufo', initParam(param));
+    var ufo = createEntity(UFO_NAME, initParam(param));
     
 
     /** Tymczasowo aby obadać położenie */

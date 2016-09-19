@@ -139,54 +139,6 @@ function initCanvas() {
 }
 
 /**
- * Wykrywamy kolizję
- */
-function checkCollision() {
-
-    /**
-     * Metoda wykrywająca kolizję dwóch obiektów
-     */
-    function  isIntersection(a, b) {
-        var aWidth = a.img.width,
-            aHeight = a.img.height,
-            bWidth = b.img.width,
-            bHeight = b.img.height;
-        
-        var minX = Math.min(a.x, b.x);
-        var minY = Math.min(a.y, b.y);
-
-        var maxX = Math.max(a.x + aWidth, b.x + bWidth);
-        var maxY = Math.max(a.y + aHeight, b.y + bHeight);
-
-        var result = (maxX - minX) < (aWidth + bWidth) && (maxY - minY) < (aHeight + bHeight); 
-        return result; 
-
-    }
-
-    //Lecimy po obiektach i sprawdzamy kolizję
-    var count = entities.length;
-    for(i = 0; i < count - 1; i++) {
-        for(j = i + 1; j < count; j++) {
-            if(!isIntersection(entities[i], entities[j])) {
-                continue;
-            };
-            
-            //Jeżeli kolizja rakiety z ufo
-            if((entities[i].type === 'missile' && entities[j].type === 'ufo') ||
-                    (entities[i].type === 'ufo' && entities[j].type === 'missile')) {
-                console.log("kolizja: " + entities[i].type + ' z ' + entities[j].type);
-
-                //wybuch
-                createExplosion(entities[j].x, entities[j].y);
-
-                entities[i].dead = true;
-                entities[j].dead = true;                
-            };            
-        }
-    }
-}
-
-/**
  * Główna pętla gry
  */
 function gameLoop() {
