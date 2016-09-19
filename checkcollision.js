@@ -18,9 +18,38 @@ function checkCollision() {
         var maxX = Math.max(a.x + aWidth, b.x + bWidth);
         var maxY = Math.max(a.y + aHeight, b.y + bHeight);
 
-        var result = (maxX - minX) < (aWidth + bWidth) && (maxY - minY) < (aHeight + bHeight); 
-        return result; 
+        var expX, expY;
 
+        var result = (maxX - minX) < (aWidth + bWidth) && (maxY - minY) < (aHeight + bHeight); 
+        
+        if(result) {            
+            //Wyliczam środek styku
+            var expX = minX + ((maxX - minX) / 2); 
+            var expY = minY + ((maxY - minY) / 2);
+
+            console.log('a: ' + a.type + ' x: ' + a.x + ' y: ' + a.y + ' width: ' + aWidth + ' height: ' + aHeight);            
+            console.log('b: ' + b.type + ' x: ' + Math.round(b.x) + ' y: ' + Math.round(b.y) + ' width: ' + bWidth + ' height: ' + bHeight);
+            console.log('---------------------------------------------------------------------');
+            console.log('maxX: ' + maxX);
+            console.log('minX: ' + Math.round(minX));
+            console.log('maxX - minX: ' + Math.round((maxX - minX)));
+            console.log('aWidth + bWidth: ' + (aWidth + bWidth));
+            console.log('---------------------------------------------------------------------');
+            console.log('maxY: ' + maxY);
+            console.log('minY: ' + Math.round(minY));
+            console.log('maxY - minY: ' + Math.round((maxY - minY)));
+            console.log('aHeight + bHeight: ' + (aHeight + bHeight));            
+            console.log('---------------------------------------------------------------------');
+
+            console.log('expX: ' + expX);
+            console.log('expY: ' + expY);
+        }
+        
+        return {
+            res: result,
+            x: expX,
+            y: expY
+        };         
     }
 
     //Lecimy po obiektach i sprawdzamy kolizję
@@ -28,7 +57,8 @@ function checkCollision() {
     var eiType, ejType;
     for(i = 0; i < count - 1; i++) {
         for(j = i + 1; j < count; j++) {
-            if(!isIntersection(entities[i], entities[j])) {
+            var result = isIntersection(entities[i], entities[j]);             
+            if(!result.res) {
                 continue;
             };
             eiType = entities[i].type;  
@@ -40,7 +70,8 @@ function checkCollision() {
                     (eiType === UFO_NAME && ejType === MISSILE_NAME)) {
                 
                 console.log("kolizja: " + eiType + ' z ' + ejType);
-                //wybuch
+                
+                //wybuch na czubku rakiety i jest gucio
                 createExplosion(entities[j].x, entities[j].y);
 
                 entities[i].dead = true;
@@ -52,8 +83,9 @@ function checkCollision() {
                 (eiType === PLAYER_NAME && ejType === UFO_NAME)) {
                 
                 console.log("kolizja: " + eiType + ' z ' + ejType);
-                //wybuch
-                createExplosion(entities[j].x, entities[j].y);
+                
+                //wybuch na podstawie obliczonego miejsca kolizji
+                createExplosion(result.x, result.y);
 
                 entities[i].dead = true;
                 entities[j].dead = true;                
