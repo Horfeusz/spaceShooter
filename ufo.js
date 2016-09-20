@@ -12,25 +12,29 @@ function createUfo(param) {
         /**
          * FIXME - do zrobienia losowe położenie.
          * np. losujemy z której połówki się pojawi albo z prawej albo z lewej od tego uzalezniamy parametry
-         */
-        
+         */        
         parameters.vx = (UFO_X_SPEED + Math.random());
         parameters.vy = Math.random();
                 
-        param.xModifier = 1;
-        param.yModifier = 1;
+        parameters.xModifier = 1;
+        parameters.yModifier = 1;
+
+        //Atrybut zliczający wywołanie metody move w kontekście zrzucania bomby
+        parameters.moveCountForBomb = 0;
 
         return parameters;
     };
         
     var ufo = createEntity(UFO_NAME, initParam(param));
     
-
-    /** Tymczasowo aby obadać położenie */
-    ufo.draw = function(context) {
-        context.drawImage(this.img, this.x, this.y, this.getWidth(), this.getHeight());
-
-        //console.log("x: " + this.x + ", y: " + this.y);
+    ufo.dumpBomb = function() {
+        //Póki co najprstrze implementacja, co 100 klatek
+        this.moveCountForBomb++;
+        if(this.moveCountForBomb < 100) {
+            return;
+        }
+        this.moveCountForBomb = 0;
+        createBomb(this);
     };
 
     /** Metoda losuje wartość przesuwania się i ustawia modyfikator dla osi X*/
@@ -68,6 +72,9 @@ function createUfo(param) {
 
         this.x += (this.vx * this.xModifier);
         this.y += (this.vy * this.yModifier);
+
+        //Zrzuć bombę
+        this.dumpBomb();         
     };
 
     return ufo;

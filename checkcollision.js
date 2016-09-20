@@ -27,6 +27,7 @@ function checkCollision() {
             var expX = minX + ((maxX - minX) / 2); 
             var expY = minY + ((maxY - minY) / 2);
 
+            /*
             console.log('a: ' + a.type + ' x: ' + a.x + ' y: ' + a.y + ' width: ' + aWidth + ' height: ' + aHeight);            
             console.log('b: ' + b.type + ' x: ' + Math.round(b.x) + ' y: ' + Math.round(b.y) + ' width: ' + bWidth + ' height: ' + bHeight);
             console.log('---------------------------------------------------------------------');
@@ -43,6 +44,7 @@ function checkCollision() {
 
             console.log('expX: ' + expX);
             console.log('expY: ' + expY);
+            */
         }
         
         return {

@@ -13,6 +13,7 @@
  * Paczka spritów: http://opengameart.org/content/complete-spaceship-game-art-pack
  *                  www.unluckystudio.com
  * 
+ * Edytor online grafik: https://pixlr.com/
  *  
  */
 
@@ -53,15 +54,18 @@ var keys = {
  * Prototyp obiektu
  */
 var EntityPrototype = {
+    
     /** Metoda rysowania obiektu */
     draw: function(context) {
         context.drawImage(this.img, this.x, this.y, this.getWidth(), this.getHeight());
     },
+
     /** Zmiana współżednych obiektów */
     move: function() {
         this.x += this.vx;
         this.y += this.vy;
     },
+
     /** Zwracam szerokość obiektu */
     getWidth: function() {
         if(this.img === undefined || this.img === null) {
@@ -69,6 +73,7 @@ var EntityPrototype = {
         }
         return this.img.width + this.correctWidth;
     },
+
     /** Zwracam wysokość obiektu */
     getHeight: function () {
         if(this.img === undefined || this.img === null) {
@@ -138,9 +143,9 @@ function initCanvas() {
     ctx = canvas.getContext('2d');    
 }
 
-/**
+/**************************************************************************************
  * Główna pętla gry
- */
+ **************************************************************************************/
 function gameLoop() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -175,15 +180,15 @@ function initialize() {
 
     createPlayer();
 
-    //createUfo({x:0, y:20});
-    //createUfo({x:120, y:80});
+    createUfo({x:0, y:20});
+    createUfo({x:120, y:80});
     createUfo({x:40, y:130});
 
     setInterval(gameLoop, 1000/60);           
 }
 /**************************************************************************************/
 $(document).ready(function() {
-    loadImges('images', ['spco.png', 'ufo.png', 'missile.png'], null);
+    loadImges('images', ['spco.png', 'ufo.png', 'missile.png', 'bomb1.png'], null);
     
     var imgs = []; 
     var pad = "0000";
