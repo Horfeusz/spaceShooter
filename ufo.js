@@ -15,7 +15,8 @@ function createUfo(param) {
          */        
         parameters.vx = (UFO_X_SPEED + Math.random());
         parameters.vy = Math.random();
-                
+        param.correctWidth = -20;
+        param.correctHeight = -15;
         parameters.xModifier = 1;
         parameters.yModifier = 1;
 

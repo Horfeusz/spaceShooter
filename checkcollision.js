@@ -52,7 +52,23 @@ function checkCollision() {
             x: expX,
             y: expY
         };         
-    }
+    };
+
+    /*
+    function collisionMissleUfo(ei, ej) {
+        if((eiType === MISSILE_NAME && ejType === UFO_NAME) ||
+                (eiType === UFO_NAME && ejType === MISSILE_NAME)) {
+            
+            console.log("kolizja: " + eiType + ' z ' + ejType);
+            
+            //wybuch na czubku rakiety i jest gucio
+            createExplosion(entities[j].x, entities[j].y);
+
+            entities[i].dead = true;
+            entities[j].dead = true;                
+        };
+    };
+    */
 
     //Lecimy po obiektach i sprawdzamy kolizję
     var count = entities.length;

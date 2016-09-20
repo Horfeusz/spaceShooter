@@ -21,8 +21,8 @@ function createBomb(fireObject) {
         var param = {};
         param.x = fireObject.x + (fireObject.getWidth() / 2);
         param.y = fireObject.y + (fireObject.getHeight());
-        param.correctWidth = -15;
-        param.correctHeight = -35;
+        param.correctWidth = -20;
+        param.correctHeight = -40;
         param.vy = BOMB_SPEED; 
         return param; 
     };
