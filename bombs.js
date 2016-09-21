@@ -14,8 +14,8 @@ var BOMB_SPEED = 3;
 
 function createBomb(fireObject) {
 
-    console.log(fireObject.x);
-    console.log(fireObject.y)
+    //console.log(fireObject.x);
+    //console.log(fireObject.y)
     
     function initParam() {
         var param = {};
@@ -28,5 +28,17 @@ function createBomb(fireObject) {
     };
 
     var bomb = createEntity(BOMB_NAME, initParam());
+
+    //Nadpisanie metody poruszającej obiekt
+    bomb.move = function() {
+        //TODO - Jak uruchomić metodę bazową
+        this.x += this.vx;
+        this.y += this.vy;        
+
+        //Jeżeli jest poza ekranem to ubijmy ten obiek i wyczyśćmy pamięć
+        if(this.y > CANVA_HEIGHT) {
+            this.dead = true;
+        }
+    };    
 
 }

@@ -54,21 +54,68 @@ function checkCollision() {
         };         
     };
 
-    /*
+    /**
+     * Kolizja rakiety z UFO
+     */
     function collisionMissleUfo(ei, ej) {
-        if((eiType === MISSILE_NAME && ejType === UFO_NAME) ||
-                (eiType === UFO_NAME && ejType === MISSILE_NAME)) {
-            
-            console.log("kolizja: " + eiType + ' z ' + ejType);
+        if((ei.type === MISSILE_NAME && ej.type === UFO_NAME) ||
+                (ei.type === UFO_NAME && ej.type === MISSILE_NAME)) {
+            console.log("kolizja: " + ei.type + ' z ' + ej.type);
+
+            //Ustal parametry wybuchu. X rakiety Y ufa
+            var expX, expY;
+            if(ei.type === MISSILE_NAME) {
+                expX = ei.x;
+                expY = ei.y;
+            } else {
+                expX = ej.x;
+                expY = ej.y;
+            };
             
             //wybuch na czubku rakiety i jest gucio
-            createExplosion(entities[j].x, entities[j].y);
+            createExplosion(expX, expY);
 
-            entities[i].dead = true;
-            entities[j].dead = true;                
+            ei.dead = true;
+            ej.dead = true;                
         };
     };
-    */
+
+    /**
+     * Kolizja statku z Ufo
+     * 
+     * FIXME - Można udoskonalić kolizję z statkiem przy założeniu, że kolizja następuje z trójkątem
+     * którym jest statek, który jest w kwadracie rysunku.
+     * Należałoby obrysować statek liniami i obliczyć czy punkt kolizji zawiera się w trójkącie
+     */
+    function collisionPlayerUfo(ei, ej) {
+        if((ei.type === UFO_NAME && ej.type === PLAYER_NAME) || 
+            (ei.type === PLAYER_NAME && ej.type === UFO_NAME)) {
+            
+            console.log("kolizja: " + ei.type + ' z ' + ej.type);
+            
+            //wybuch na podstawie obliczonego miejsca kolizji
+            createExplosion(result.x, result.y);
+
+            ei.dead = true;
+            ej.dead = true;                                
+        }
+    };
+
+    /**
+     * Kolizja bomby z statkiem
+     */
+    function collisionBombPlayer(ei, ej) {
+        if((ei.type === BOMB_NAME && ej.type === PLAYER_NAME) || 
+            (ei.type === PLAYER_NAME && ej.type === BOMB_NAME)) {
+            console.log("kolizja: " + ei.type + ' z ' + ej.type);
+            
+            //wybuch na podstawie obliczonego miejsca kolizji
+            createExplosion(result.x, result.y);
+
+            ei.dead = true;
+            ej.dead = true;            
+        }        
+    };
 
     //Lecimy po obiektach i sprawdzamy kolizję
     var count = entities.length;
@@ -79,35 +126,9 @@ function checkCollision() {
             if(!result.res) {
                 continue;
             };
-            eiType = entities[i].type;  
-            ejType = entities[j].type;
-
-            
-            //Jeżeli kolizja pocisku z ufo
-            if((eiType === MISSILE_NAME && ejType === UFO_NAME) ||
-                    (eiType === UFO_NAME && ejType === MISSILE_NAME)) {
-                
-                console.log("kolizja: " + eiType + ' z ' + ejType);
-                
-                //wybuch na czubku rakiety i jest gucio
-                createExplosion(entities[j].x, entities[j].y);
-
-                entities[i].dead = true;
-                entities[j].dead = true;                
-            };
-
-            //Jeżeli kolizja statku z ufo
-            if((eiType === UFO_NAME && ejType === PLAYER_NAME) || 
-                (eiType === PLAYER_NAME && ejType === UFO_NAME)) {
-                
-                console.log("kolizja: " + eiType + ' z ' + ejType);
-                
-                //wybuch na podstawie obliczonego miejsca kolizji
-                createExplosion(result.x, result.y);
-
-                entities[i].dead = true;
-                entities[j].dead = true;                
-            }
+            collisionMissleUfo(entities[i], entities[j]);
+            collisionPlayerUfo(entities[i], entities[j]);
+            collisionBombPlayer(entities[i], entities[j]);
         }
     }
 }

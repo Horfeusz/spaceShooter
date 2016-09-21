@@ -34,6 +34,10 @@ function createUfo(param) {
         if(this.moveCountForBomb < 100) {
             return;
         }
+        //Jeżeli jest powyżej dwóch swoich długości
+        if(this.x > (CANVA_HEIGHT - (this.getHeight() * 3))) {
+            return;
+        }
         this.moveCountForBomb = 0;
         createBomb(this);
     };
