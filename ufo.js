@@ -3,21 +3,51 @@
  */
 
 var UFO_NAME = 'ufo';
-
+//Prekość ufoka
 var UFO_X_SPEED = 1;
+//Co ile klatek ma się pojawiać ufok
+var UFO_HOW_MUCH_FRAMES = 50;
+//Licznik klatek, na starcie jest 50 aby już generować ufoka
+var UFO_FRAMES_COUNTER = 50;
 
+/*************************************************************************************************
+ * Tworze ufoka
+ ************************************************************************************************/
 function createUfo(param) {
 
+    /**
+     * Losuje z której strony ma nadlecieć ufokos
+     */
+    function randomCreateX() {
+        var modifier, xx;
+        if((Math.random() - 0.5) < 0) {
+            //z lewej
+            modifier = 1;
+            xx = 0 + Math.round(Math.random() * 100);
+        } else {
+            //z prawej
+            modifier = -1;
+            xx = CANVA_HEIGHT - Math.round(Math.random() * 100);
+        }
+        return {
+            x: xx,
+            xMod: modifier
+        }
+    }
+
+    /**
+     * Inicjalizacja
+     */
     function initParam(parameters) {
-        /**
-         * FIXME - do zrobienia losowe położenie.
-         * np. losujemy z której połówki się pojawi albo z prawej albo z lewej od tego uzalezniamy parametry
-         */        
+        var parmX = randomCreateX();
+        parameters.x = parmX.x; 
+        parameters.y = (0 - 40);
         parameters.vx = (UFO_X_SPEED + Math.random());
         parameters.vy = Math.random();
         param.correctWidth = -20;
         param.correctHeight = -15;
-        parameters.xModifier = 1;
+        //parameters.xModifier = 1;
+        parameters.xModifier = parmX.xMod;
         parameters.yModifier = 1;
 
         //Atrybut zliczający wywołanie metody move w kontekście zrzucania bomby
@@ -83,4 +113,59 @@ function createUfo(param) {
     };
 
     return ufo;
-}
+};
+
+/*************************************************************************************************
+ * Metoda będzie generowała ufoki 
+ ************************************************************************************************/
+function ufos() {
+
+    /**
+     * Metoda sprawdza czy generujemy gada
+     */
+    function isCreate() {
+        //Zliczam ile gadów jest aktualnie na ekranie
+        var ufoCount = 0
+        entities.forEach(function(entity) {
+            if(!entity.dead && entity.type === UFO_NAME) {
+                ufoCount++;
+            }
+        });
+        //Narazie tylko trzy, pierwszy level
+        if(ufoCount >= 3) {
+            return false;
+        }
+        //Jeżeli nie ma już ufoków
+        if(ufoCount === 0) {
+            UFO_HOW_MUCH_FRAMES = Math.round((Math.random() * 100) / 4);
+            console.log("Ufoka pojawi się za: " + UFO_HOW_MUCH_FRAMES);
+            return true;
+        } 
+
+        UFO_FRAMES_COUNTER++;
+        if(UFO_FRAMES_COUNTER < UFO_HOW_MUCH_FRAMES) {
+            return false;
+        }
+        //Minęła granica klatek generujemy ufoka jeżeli wylosujemy liczbę większą od 0,5        
+        //if((Math.random() - 0.5) < 0) {
+        //    return false;
+        //}
+        return true;
+    };
+
+    /**
+     * Losuje wartość za ile klatek pojawi się kolejny ufok
+     */
+    function randomUfoHowMuchFrames() {
+        UFO_HOW_MUCH_FRAMES = Math.round((Math.random() * 100) / 2);
+        console.log("Ufoka pojawi się za: " + UFO_HOW_MUCH_FRAMES);
+    };
+
+    //------------------------------------------------------------------------------
+    if(!isCreate()) {
+        return;
+    }
+    createUfo({});
+
+    randomUfoHowMuchFrames();
+};

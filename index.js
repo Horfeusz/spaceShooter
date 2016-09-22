@@ -157,6 +157,9 @@ function gameLoop() {
         return !entity.dead;
     });
 
+    //Generujemy ufoki
+    ufos();
+
     //Zmiana współżędnych położenia obiektów
     entities.forEach(function (entity) {
         entity.move();
@@ -180,9 +183,9 @@ function initialize() {
 
     createPlayer();
 
-    createUfo({x:0, y:20});
-    createUfo({x:120, y:80});
-    createUfo({x:40, y:130});
+    //createUfo({x:0, y:20});
+    //createUfo({x:120, y:80});
+    //createUfo({x:40, y:130});
 
     setInterval(gameLoop, 1000/60);           
 }
