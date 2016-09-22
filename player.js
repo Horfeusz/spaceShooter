@@ -8,9 +8,13 @@
 */
 
 var PLAYER_NAME = 'spco';
+var PLAYER_POINTS = 0;
+var PLAYER_OR_ALIVE = false;
 
 function createPlayer() {
     
+    PLAYER_OR_ALIVE = true;
+
     player = createEntity(PLAYER_NAME, {x:500, 
                                         y:480, 
                                         speed:6, 
@@ -34,6 +38,9 @@ function createPlayer() {
      * Metoda która przyjmuje informację na temat wciśnietych klawiszy 
      */
     player.inputKeys = function(pKeys) {
+        if(!PLAYER_OR_ALIVE) {
+            return;
+        }
         player.speedShotIncrement(false);
         var tabKeys = Object.keys(pKeys);
         for(i = 0; i < tabKeys.length; i++) {

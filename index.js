@@ -1,11 +1,11 @@
 //http://13zmiennych.blogspot.com/2013/10/jak-zrobic-prosta-gre-w-javascript_13.html
+//http://explosiongenerator.com/
 /**
  * Lista TODO
  * 
  * 3. Przy zestrzeleniu ufa jakiś wybuch: http://jsdn.pl/javascript-tworzenie-animacji-grach-przy-uzyciu-spritesheetow/
  *                                          http://webkod.pl/kurs-css/lekcje/dzial-4/css3-animowany-obrazek-klatka-po-klatce
- * 4. Ufoki się odgryzają, zrzucają bąby
- * 5. Dalsze pomysły .....
+ * 
  * 6. Tło
  *
  * Fajne Sprity ufokowe: http://millionthvector.blogspot.com/p/free-sprites_12.html
@@ -172,6 +172,9 @@ function gameLoop() {
     entities.forEach(function (entity) {
         entity.draw(ctx);
     });    
+
+    //Rysowanie ilości punktów
+    playerPointsDraw(ctx);
 }
 
 /**************************************************************************************
@@ -182,10 +185,6 @@ function initialize() {
     console.log('initialize()');
 
     createPlayer();
-
-    //createUfo({x:0, y:20});
-    //createUfo({x:120, y:80});
-    //createUfo({x:40, y:130});
 
     setInterval(gameLoop, 1000/60);           
 }

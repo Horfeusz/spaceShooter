@@ -20,7 +20,8 @@ function createExplosion(px, py) {
     //Nadpisanie metody poruszającej obiekt
     explosion.move = function() {        
         //Incrementuje indeks obrazka
-        this.incFile++;
+        //this.incFile++;
+        this.incFile += 2;
         //this.incFile = this.incFile + 3;
         if(this.incFile > FILE_COUNT) {
             this.dead = true;

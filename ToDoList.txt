@@ -1,0 +1,13 @@
+1. Tło
+2. Asteroidy
+3. lewele
+4. Algorytmy wypuszczania bomb
+5. Kolizja rakiety z (http://explosiongenerator.com/)
+
+
+
+
+
+Pomysł:
+Gra na czas np: 5 minut i ile punktów w tym czasie się zdobędzie.
+Zapisywanie rekordów w bazie danych.
