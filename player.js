@@ -7,18 +7,46 @@
 *
 */
 
+//Nazwa obiektu gracza
 var PLAYER_NAME = 'spco';
-var PLAYER_POINTS = 0;
+//Czy pojzad gracza żyje
 var PLAYER_OR_ALIVE = false;
+//Tablica żyć
+var PLAYER_LIVES = [];
 
 function createPlayer() {
     
+    /**
+     * Metoda tworząca trzy małe stateczki które będą symbolizować życia
+     */
+    function createPlayerLive() {
+        PLAYER_LIVES.push(createEntity(PLAYER_NAME, {x: (CANVA_WIDTH - 80), 
+                                              y:30,   
+                                              correctWidth: -350,
+                                              correctHeight: -350},
+                                              'playerL1'));                                                  
+
+        PLAYER_LIVES.push(createEntity(PLAYER_NAME, {x: (CANVA_WIDTH - 50), 
+                                              y:30,   
+                                              correctWidth: -350,
+                                              correctHeight: -350},
+                                              'playerL2'));
+
+        PLAYER_LIVES.push(createEntity(PLAYER_NAME, {x: (CANVA_WIDTH - 20), 
+                                              y:30,   
+                                              correctWidth: -350,
+                                              correctHeight: -350},
+                                              'playerL3'));
+    }
+
+    createPlayerLive();
+
     PLAYER_OR_ALIVE = true;
 
     player = createEntity(PLAYER_NAME, {x:500, 
                                         y:480, 
                                         speed:6, 
-                                        speedShot: 30, 
+                                        speedShot: 60, 
                                         speedShotInc: 0,
                                         correctWidth: -250,
                                         correctHeight: -250})
@@ -84,4 +112,19 @@ function createPlayer() {
         }
     };
     return player
+};
+
+/**
+ * Funkcja usuwa jedno życie
+ */
+function deadPlayerLive() {
+    var lives = PLAYER_LIVES.length;
+    
+    //TODO
+    
+    
+    
+    if(PLAYER_LIVES.length === 0) {
+        //FIXME GAME OVER
+    } 
 }

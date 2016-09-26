@@ -96,10 +96,10 @@ var EntityPrototype = {
 /**
  * Metoda ładująca obrazki
  */
-function loadImges(directory, fileNames, onComplete) {
-    var imagesCount = fileNames.length;
+function loadImges(directory, defObjects, onComplete) {
+    var imagesCount = defObjects.length;
     
-    fileNames.forEach(function(fileName) {
+    defObjects.forEach(function(defObject) {
         var img = new Image();        
         //Przypisujemy zdarzenie wołane po załadowaniu obrazka
         img.onload = function() {
@@ -109,10 +109,15 @@ function loadImges(directory, fileNames, onComplete) {
                 onComplete();
             } 
         }        
-        img.src = directory + "/" + fileName;
+        img.src = directory + "/" + defObject.file;
 
         //Ustalam sobie nazwę obiektu z nazwy pliku
-        var objectName = fileName.substring(0, fileName.lastIndexOf('.'));
+        var objectName = null;
+        if(defObject.name === undefined) {
+            objectName = defObject.file.substring(0, defObject.file.lastIndexOf('.'));
+        } else {
+            objectName = defObject.name;
+        }
         images[objectName] = img; 
     });
 }
@@ -120,18 +125,19 @@ function loadImges(directory, fileNames, onComplete) {
 /**
  * Metoda tworzy jednostki
  */
-function createEntity(entityName, properties) {
+function createEntity(entityName, properties, entityType) {
     var entity = Object.create(EntityPrototype);
     entity.img = images[entityName];
-    entity.type = entityName;
+    if(entityType !== undefined) {
+        entity.type = entityType;
+    } else {
+        entity.type = entityName;    
+    }
 
     for(var propertyName in properties) {
         entity[propertyName] = properties[propertyName];
     }
     entity.posArray = (entities.push(entity) - 1);
-
-    console.log(entityName + ": " + entity.posArray);
-
     return entity;
 }
 
@@ -181,8 +187,9 @@ function gameLoop() {
  * Metoda inicjująca grę
  **************************************************************************************/
 function initialize() {
-    initCanvas();
     console.log('initialize()');
+    
+    initCanvas();
 
     createPlayer();
 
@@ -190,13 +197,17 @@ function initialize() {
 }
 /**************************************************************************************/
 $(document).ready(function() {
-    loadImges('images', ['spco.png', 'ufo.png', 'missile.png', 'bomb1.png'], null);
-    
+    //Ładuje obiekty główne
+    loadImges('images', [{file: 'spco.png'}, 
+                         {file: 'ufo.png'}, 
+                         {file: 'missile.png'}, 
+                         {file: 'bomb1.png'}], null);    
+    //Ładuje obrazji ekslozji
     var imgs = []; 
     var pad = "0000";
     for(i = 0; i < 279; i++) {
         var number = "" + i;
-        imgs.push("explosion" + pad.substring(0, pad.length - number.length) + number + ".png")
+        imgs.push({file: "explosion" + pad.substring(0, pad.length - number.length) + number + ".png"});
     }
     loadImges('images/explosion', imgs, initialize);
 

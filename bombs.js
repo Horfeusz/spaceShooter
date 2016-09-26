@@ -13,9 +13,6 @@ var BOMB_SPEED = 3;
  */
 
 function createBomb(fireObject) {
-
-    //console.log(fireObject.x);
-    //console.log(fireObject.y)
     
     function initParam() {
         var param = {};

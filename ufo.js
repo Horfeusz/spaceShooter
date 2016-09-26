@@ -27,7 +27,7 @@ function createUfo(param) {
         } else {
             //z prawej
             modifier = -1;
-            xx = CANVA_HEIGHT - Math.round(Math.random() * 100);
+            xx = CANVA_WIDTH - Math.round(Math.random() * 100);
         }
         return {
             x: xx,
@@ -43,6 +43,9 @@ function createUfo(param) {
         parameters.x = parmX.x; 
         parameters.y = (0 - 40);
         parameters.vx = (UFO_X_SPEED + Math.random());
+
+        console.log("parameters.vx: " + parameters.vx);
+
         parameters.vy = Math.random();
         param.correctWidth = -20;
         param.correctHeight = -15;

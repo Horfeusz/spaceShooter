@@ -78,8 +78,7 @@ function checkCollision() {
             ei.dead = true;
             ej.dead = true;                
 
-            //Dodaje punkt użytkownikowi
-            PLAYER_POINTS++;
+            addPlayerPoints(1);
         };
     };
 
