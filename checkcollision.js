@@ -82,6 +82,18 @@ function checkCollision() {
         };
     };
 
+    function collisionPlayer(ei, ej) {
+        console.log("kolizja: " + ei.type + ' z ' + ej.type);
+        
+        //wybuch na podstawie obliczonego miejsca kolizji
+        createExplosion(result.x, result.y);
+
+        ei.dead = true;
+        ej.dead = true;
+
+        deadPlayerLive();
+    };
+
     /**
      * Kolizja statku z Ufo
      * 
@@ -92,15 +104,7 @@ function checkCollision() {
     function collisionPlayerUfo(ei, ej) {
         if((ei.type === UFO_NAME && ej.type === PLAYER_NAME) || 
             (ei.type === PLAYER_NAME && ej.type === UFO_NAME)) {
-            
-            console.log("kolizja: " + ei.type + ' z ' + ej.type);
-            
-            //wybuch na podstawie obliczonego miejsca kolizji
-            createExplosion(result.x, result.y);
-
-            ei.dead = true;
-            ej.dead = true;
-            PLAYER_OR_ALIVE = false;
+                collisionPlayer(ei, ej);
         }
     };
 
@@ -110,14 +114,7 @@ function checkCollision() {
     function collisionBombPlayer(ei, ej) {
         if((ei.type === BOMB_NAME && ej.type === PLAYER_NAME) || 
             (ei.type === PLAYER_NAME && ej.type === BOMB_NAME)) {
-            console.log("kolizja: " + ei.type + ' z ' + ej.type);
-            
-            //wybuch na podstawie obliczonego miejsca kolizji
-            createExplosion(result.x, result.y);
-
-            ei.dead = true;
-            ej.dead = true;         
-            PLAYER_OR_ALIVE = false;   
+                collisionPlayer(ei, ej);
         }        
     };
 

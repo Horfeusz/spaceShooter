@@ -7,44 +7,19 @@
 *
 */
 
+var player;
 //Nazwa obiektu gracza
 var PLAYER_NAME = 'spco';
 //Czy pojzad gracza żyje
 var PLAYER_OR_ALIVE = false;
-//Tablica żyć
-var PLAYER_LIVES = [];
+
 
 function createPlayer() {
     
-    /**
-     * Metoda tworząca trzy małe stateczki które będą symbolizować życia
-     */
-    function createPlayerLive() {
-        PLAYER_LIVES.push(createEntity(PLAYER_NAME, {x: (CANVA_WIDTH - 80), 
-                                              y:30,   
-                                              correctWidth: -350,
-                                              correctHeight: -350},
-                                              'playerL1'));                                                  
-
-        PLAYER_LIVES.push(createEntity(PLAYER_NAME, {x: (CANVA_WIDTH - 50), 
-                                              y:30,   
-                                              correctWidth: -350,
-                                              correctHeight: -350},
-                                              'playerL2'));
-
-        PLAYER_LIVES.push(createEntity(PLAYER_NAME, {x: (CANVA_WIDTH - 20), 
-                                              y:30,   
-                                              correctWidth: -350,
-                                              correctHeight: -350},
-                                              'playerL3'));
-    }
-
-    createPlayerLive();
-
     PLAYER_OR_ALIVE = true;
 
     player = createEntity(PLAYER_NAME, {x:500, 
-                                        y:480, 
+                                        y:520, 
                                         speed:6, 
                                         speedShot: 60, 
                                         speedShotInc: 0,
@@ -115,16 +90,11 @@ function createPlayer() {
 };
 
 /**
- * Funkcja usuwa jedno życie
+ * Klawisze dla playera
  */
-function deadPlayerLive() {
-    var lives = PLAYER_LIVES.length;
-    
-    //TODO
-    
-    
-    
-    if(PLAYER_LIVES.length === 0) {
-        //FIXME GAME OVER
-    } 
-}
+function inputKeysPlayer(keys) {
+    if(!PLAYER_OR_ALIVE) {
+        return;
+    }
+    player.inputKeys(keys);
+};

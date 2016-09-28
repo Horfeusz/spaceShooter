@@ -22,7 +22,7 @@
 var images = {};
 //obiekty
 var entities = [];
-var canvas, ctx, player;
+var canvas, ctx;
 var CANVA_HEIGHT = 600;
 var CANVA_WIDTH = 1000;
 
@@ -163,6 +163,9 @@ function gameLoop() {
         return !entity.dead;
     });
 
+    //Generujemy gracza
+    playerToLive();
+
     //Generujemy ufoki
     ufos();
 
@@ -172,7 +175,7 @@ function gameLoop() {
     });
 
     //obsługa klawiszy dla statku/gracza
-    player.inputKeys(keys);
+    inputKeysPlayer(keys);
 
     //Rysowanie na ekranie obiektów po wszystkich operacjach
     entities.forEach(function (entity) {
@@ -191,7 +194,7 @@ function initialize() {
     
     initCanvas();
 
-    createPlayer();
+    initPlayerLives();
 
     setInterval(gameLoop, 1000/60);           
 }
