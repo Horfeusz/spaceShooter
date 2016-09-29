@@ -204,7 +204,8 @@ $(document).ready(function() {
     loadImges('images', [{file: 'spco.png'}, 
                          {file: 'ufo.png'}, 
                          {file: 'missile.png'}, 
-                         {file: 'bomb1.png'}], null);    
+                         {file: 'bomb1.png'},
+                         {file: 'bombs.png'}], null);    
     //Ładuje obrazji ekslozji
     var imgs = []; 
     var pad = "0000";
