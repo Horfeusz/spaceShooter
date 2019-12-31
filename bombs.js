@@ -3,17 +3,17 @@
  */
 
 //Nazwa obiektu
-var BOMB_NAME = 'bombs';
+let BOMB_NAME = 'bombs';
 // Prędkość bomby
-var BOMB_SPEED = 3;
+let BOMB_SPEED = 1;
 // Ilość klatek do zmiany rysunku
-var BOMB_CHANGE_LIMIT = 20;
+const BOMB_CHANGE_LIMIT = 20;
 
-var BOMB_CORRECT_WIDTH = -15;
-var BOMB_CORRECT_HEIGHT = -30; 
+const BOMB_CORRECT_WIDTH = 0;
+const BOMB_CORRECT_HEIGHT = 0;
 
 //Parametry dla rysunku bomby
-var params = [{sx:13, sy:48, sWidth:26, sHeight:63, dx:null, dy:null, dWidth:23, dHeight:63},
+const params = [{sx:13, sy:48, sWidth:26, sHeight:63, dx:null, dy:null, dWidth:23, dHeight:63},
               {sx:41, sy:48, sWidth:26, sHeight:63, dx:null, dy:null, dWidth:26, dHeight:63},
               {sx:70, sy:48, sWidth:26, sHeight:63, dx:null, dy:null, dWidth:26, dHeight:63},
               {sx:99, sy:48, sWidth:26, sHeight:63, dx:null, dy:null, dWidth:26, dHeight:63},
@@ -35,24 +35,24 @@ var params = [{sx:13, sy:48, sWidth:26, sHeight:63, dx:null, dy:null, dWidth:23,
 function createBomb(fireObject) {
     
     function initParam() {
-        var param = params[0];
+        const param = params[2];
         param.dx = fireObject.x + (fireObject.getWidth() / 2);
         param.dy = fireObject.y + (fireObject.getHeight());  
         
-        var result = {};
+        const result = {};
         result.param = param;
         result.counter = 0;
         result.vy = BOMB_SPEED;
 
         return result; 
-    };
+    }
 
-    var bomb = createEntity(BOMB_NAME, initParam());
+    const bomb = createEntity(BOMB_NAME, initParam());
 
     //Nadpisanie metody poruszającej obiekt
     bomb.move = function() {
-        this.param.dx += this.vx;
-        this.param.dy += this.vy;        
+        //this.param.dx += this.vx;
+        this.param.dy += 1;
 
         //Jeżeli jest poza ekranem to ubijmy ten obiekt i wyczyśćmy pamięć
         if(this.param.dy > CANVA_HEIGHT) {
@@ -71,7 +71,8 @@ function createBomb(fireObject) {
             this.param.dy, 
             (this.param.dWidth + BOMB_CORRECT_WIDTH), 
             (this.param.dHeight + BOMB_CORRECT_HEIGHT));        
-    }; 
+    };
+    
 
     bomb.getWidth = function() {
         return this.param.dWidth - BOMB_CORRECT_WIDTH;

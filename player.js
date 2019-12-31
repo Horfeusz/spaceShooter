@@ -7,11 +7,11 @@
 *
 */
 
-var player;
+let player;
 //Nazwa obiektu gracza
-var PLAYER_NAME = 'spco';
-//Czy pojzad gracza żyje
-var PLAYER_OR_ALIVE = false;
+const PLAYER_NAME = 'spco';
+//Czy pojazad gracza żyje
+let PLAYER_OR_ALIVE = false;
 
 
 function createPlayer() {
@@ -45,12 +45,9 @@ function createPlayer() {
             return;
         }
         player.speedShotIncrement(false);
-        var tabKeys = Object.keys(pKeys);
-        for(i = 0; i < tabKeys.length; i++) {
-            if(pKeys[tabKeys[i]].down) {
-                player.input(pKeys[tabKeys[i]].key);            
-            }
-        }
+        Object.keys(pKeys)
+            .filter(key => pKeys[key].down)
+            .forEach(key => player.input(pKeys[key].key));
     };
     
     /**
@@ -87,7 +84,7 @@ function createPlayer() {
         }
     };
     return player
-};
+}
 
 /**
  * Klawisze dla playera
@@ -97,4 +94,4 @@ function inputKeysPlayer(keys) {
         return;
     }
     player.inputKeys(keys);
-};
+}

@@ -6,26 +6,26 @@ function checkCollision() {
     /**
      * Metoda wykrywająca kolizję dwóch obiektów
      */
-    function  isIntersection(a, b) {
-        var aWidth = a.getWidth(),
+    function isIntersection(a, b) {
+        let aWidth = a.getWidth(),
             aHeight = a.getHeight(),
             bWidth = b.getWidth(),
             bHeight = b.getHeight();
         
-        var minX = Math.min(a.x, b.x);
-        var minY = Math.min(a.y, b.y);
+        let minX = Math.min(a.x, b.x);
+        let minY = Math.min(a.y, b.y);
 
-        var maxX = Math.max(a.x + aWidth, b.x + bWidth);
-        var maxY = Math.max(a.y + aHeight, b.y + bHeight);
+        let maxX = Math.max(a.x + aWidth, b.x + bWidth);
+        let maxY = Math.max(a.y + aHeight, b.y + bHeight);
 
-        var expX, expY;
+        let expX, expY;
 
-        var result = (maxX - minX) < (aWidth + bWidth) && (maxY - minY) < (aHeight + bHeight); 
+        const result = (maxX - minX) < (aWidth + bWidth) && (maxY - minY) < (aHeight + bHeight);
         
         if(result) {            
             //Wyliczam środek styku
-            var expX = minX + ((maxX - minX) / 2); 
-            var expY = minY + ((maxY - minY) / 2);
+            let expX = minX + ((maxX - minX) / 2);
+            let expY = minY + ((maxY - minY) / 2);
 
             /*
             console.log('a: ' + a.type + ' x: ' + a.x + ' y: ' + a.y + ' width: ' + aWidth + ' height: ' + aHeight);            
@@ -52,12 +52,12 @@ function checkCollision() {
             x: expX,
             y: expY
         };         
-    };
+    }
 
     /**
      * Kolizja rakiety z UFO
      */
-    function collisionMissleUfo(ei, ej) {
+    function collisionMissileUfo(ei, ej) {
         if((ei.type === MISSILE_NAME && ej.type === UFO_NAME) ||
                 (ei.type === UFO_NAME && ej.type === MISSILE_NAME)) {
             console.log("kolizja: " + ei.type + ' z ' + ej.type);
@@ -71,16 +71,15 @@ function checkCollision() {
                 expX = ej.x;
                 expY = ej.y;
             };
-            
+
             //wybuch na czubku rakiety i jest gucio
             createExplosion(expX, expY);
 
             ei.dead = true;
-            ej.dead = true;                
 
             addPlayerPoints(1);
-        };
-    };
+        }
+    }
 
     function collisionPlayer(ei, ej) {
         console.log("kolizja: " + ei.type + ' z ' + ej.type);
@@ -92,7 +91,7 @@ function checkCollision() {
         ej.dead = true;
 
         deadPlayerLive();
-    };
+    }
 
     /**
      * Kolizja statku z Ufo
@@ -106,7 +105,7 @@ function checkCollision() {
             (ei.type === PLAYER_NAME && ej.type === UFO_NAME)) {
                 collisionPlayer(ei, ej);
         }
-    };
+    }
 
     /**
      * Kolizja bomby z statkiem
@@ -116,18 +115,17 @@ function checkCollision() {
             (ei.type === PLAYER_NAME && ej.type === BOMB_NAME)) {
                 collisionPlayer(ei, ej);
         }        
-    };
+    }
 
     //Lecimy po obiektach i sprawdzamy kolizję
-    var count = entities.length;
+    let count = entities.length;
     var eiType, ejType;
-    for(i = 0; i < count - 1; i++) {
-        for(j = i + 1; j < count; j++) {
-            var result = isIntersection(entities[i], entities[j]);             
-            if(!result.res) {
+    for(let i = 0; i < count - 1; i++) {
+        for(let j = i + 1; j < count; j++) {
+            if(!isIntersection(entities[i], entities[j]).res) {
                 continue;
-            };
-            collisionMissleUfo(entities[i], entities[j]);
+            }
+            collisionMissileUfo(entities[i], entities[j]);
             collisionPlayerUfo(entities[i], entities[j]);
             collisionBombPlayer(entities[i], entities[j]);
         }
