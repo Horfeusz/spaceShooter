@@ -146,8 +146,9 @@ function createUfos() {
      */
     function isCreate() {
         //Narazie tylko trzy, pierwszy level
+        let ufoCount = howMuchIsUfo();
 
-        if (howMuchIsUfo() >= 3) {
+        if (ufoCount >= 3) {
             return false;
         }
         //Jeżeli nie ma już ufoków
