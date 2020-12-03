@@ -62,6 +62,8 @@ function createBomb(fireObject) {
 
     //Nadpisanie metody rysującej
     bomb.draw = function(context) {
+		
+		//Testowy tekst
         context.drawImage(this.img, 
             this.param.sx, 
             this.param.sy, 
