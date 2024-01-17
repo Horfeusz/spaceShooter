@@ -12,20 +12,6 @@ const BOMB_CHANGE_LIMIT = 20;
 const BOMB_CORRECT_WIDTH = 0;
 const BOMB_CORRECT_HEIGHT = 0;
 
-//Parametry dla rysunku bomby
-const params = [{sx:13, sy:48, sWidth:26, sHeight:63, dx:null, dy:null, dWidth:23, dHeight:63},
-              {sx:41, sy:48, sWidth:26, sHeight:63, dx:null, dy:null, dWidth:26, dHeight:63},
-              {sx:70, sy:48, sWidth:26, sHeight:63, dx:null, dy:null, dWidth:26, dHeight:63},
-              {sx:99, sy:48, sWidth:26, sHeight:63, dx:null, dy:null, dWidth:26, dHeight:63},
-              {sx:128, sy:48, sWidth:26, sHeight:63, dx:null, dy:null, dWidth:26, dHeight:63},
-              {sx:158, sy:48, sWidth:28, sHeight:63, dx:null, dy:null, dWidth:28, dHeight:63},
-              {sx:190, sy:48, sWidth:33, sHeight:63, dx:null, dy:null, dWidth:33, dHeight:63},
-              {sx:226, sy:48, sWidth:33, sHeight:63, dx:null, dy:null, dWidth:33, dHeight:63},
-              {sx:262, sy:48, sWidth:31, sHeight:63, dx:null, dy:null, dWidth:31, dHeight:63},
-              {sx:297, sy:48, sWidth:27, sHeight:63, dx:null, dy:null, dWidth:27, dHeight:63},
-              {sx:328, sy:48, sWidth:26, sHeight:63, dx:null, dy:null, dWidth:26, dHeight:63},
-              {sx:358, sy:48, sWidth:26, sHeight:63, dx:null, dy:null, dWidth:26, dHeight:63},
-              {sx:388, sy:48, sWidth:26, sHeight:63, dx:null, dy:null, dWidth:26, dHeight:63}];
 
 /**
  * Metoda tworząca bombę.
